@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Red Oxide Transcoder</title>
+</head>
+<body>
+    <h1>Red Oxide Transcoder</h1>
+    <form method="post">
+        <label for="input_dir">Input Directory:</label>
+        <input type="text" id="input_dir" name="input_dir" required><br><br>
+        
+        <label for="formats">Select Audio Formats:</label><br>
+        <input type="checkbox" id="flac" name="formats" value="flac">
+        <label for="flac">FLAC</label><br>
+        <input type="checkbox" id="mp3320" name="formats" value="mp3320">
+        <label for="mp3320">MP3 320kbps</label><br>
+        <input type="checkbox" id="mp3-v0" name="formats" value="mp3-v0">
+        <label for="mp3-v0">MP3 V0</label><br><br>
+        
+        <input type="submit" value="Start Transcoding">
+    </form>
+</body>
+</html>
