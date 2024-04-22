@@ -22,12 +22,18 @@ RUN apk add --no-cache wget && \
     mv "/usr/local/bin/red_oxide-Linux-x86_64-gnu" "/usr/local/bin/red_oxide" && \
     chmod +x "/usr/local/bin/red_oxide"
 
-# Download app.py and index.html from pastebin
+# Download Web GUI
 RUN wget -O app.py https://raw.githubusercontent.com/sprtlw/red_oxide_webGUI/main/app.py
 RUN mkdir -p templates && \
     wget -O templates/index.html https://raw.githubusercontent.com/sprtlw/red_oxide_webGUI/main/templates/index.html
+RUN mkdir -p static && \
+    mkdir -p static/css && \
+    wget -O static/css/styles.css https://raw.githubusercontent.com/sprtlw/red_oxide_webGUI/main/static/css/styles.css
+
+# Convert to LF line endings
 RUN dos2unix app.py
 RUN dos2unix templates/index.html
+RUN dos2unix static/css/styles.css
 
 # Cleanup unnecessary packages
 RUN apk del curl wget
