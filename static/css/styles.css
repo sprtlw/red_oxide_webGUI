@@ -3,9 +3,6 @@
 * {
   margin: 0px;
   padding: 0px;
-}
-
-body {
   font-family: 'Exo', sans-serif;
 }
 
@@ -20,6 +17,7 @@ body {
   text-align: center;
   color: #fff;
   font-size: 50px;
+  margin-top: 6em;
 }
 
 .context form {
@@ -27,17 +25,27 @@ body {
   color: #fff;
   font-size: 25px;
   z-index: 2;
+  margin-top: 1em;
+}
+
+.input-wrapper {
+  margin-bottom: 1em;
+}
+
+.format-wrapper {
+  margin-bottom: 0.25em;
 }
 
 .checkbox-wrapper-6 {
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 12px;
 }
 .checkbox-wrapper-6 span {
   margin-left: 5px;
   margin-right: 5px;
+  font-size: 20px;
+  font-family: 'Exo', sans-serif;
 }
 .checkbox-wrapper-6 .tgl {
   display: none;
@@ -71,8 +79,8 @@ body {
 .checkbox-wrapper-6 .tgl + .tgl-btn {
   outline: 0;
   display: block;
-  width: 4em;
-  height: 2em;
+  width: 2em;
+  height: 1em;
   position: relative;
   cursor: pointer;
   -webkit-user-select: none;
@@ -112,6 +120,34 @@ body {
 }
 .checkbox-wrapper-6 .tgl-light:checked + .tgl-btn {
   background: #34336b;
+}
+
+.btn {
+  text-transform: uppercase;
+}
+.btn:hover .btn-slide-show-text1 {
+  margin-left: 65px;
+}
+.zoom-in {
+  display: inline-block;
+  color: rgb(255, 255, 255);
+  margin: 20px;
+  width: 180px;
+  height: 50px;
+  border-radius: 10px;
+  position: relative;
+  overflow: hidden;
+  text-decoration: none;
+  text-transform: uppercase;
+  text-align: center;
+  transition: all 0.5s ease 0s;
+  border: none;
+}
+.zoom-in:hover {
+  transform: scale(0.9);
+}
+.zoom-in--purple {
+  background: rgb(104, 110, 202);
 }
 
 .area {

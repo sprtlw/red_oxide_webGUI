@@ -15,10 +15,14 @@
       <h1>Red Oxide Transcoder</h1>
 
       <form method="post">
-        <label for="permalink">Permalink:</label>
-        <input type="text" id="permalink" name="permalink" required /><br />
+        <div class="input-wrapper">
+          <label for="permalink">Permalink:</label>
+          <input type="text" id="permalink" name="permalink" required />
+        </div>
 
-        <label for="formats">Select Audio Formats:</label><br />
+        <div class="format-wrapper">
+          <label for="formats">Select Audio Formats:</label><br />
+        </div>
 
         <div class="checkbox-wrapper-6">
           <input
@@ -50,7 +54,11 @@
           <span>MP3 V0</span>
         </div>
 
-        <input class="button" type="submit" value="Start Transcoding" />
+        <input
+          class="btn zoom-in zoom-in--purple"
+          type="submit"
+          value="Start Transcoding"
+        />
       </form>
     </div>
 

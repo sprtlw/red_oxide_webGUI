@@ -29,8 +29,9 @@ def index():
                 permalink
             ]
             subprocess.run(command)
+            output = subprocess.check_output(command, universal_newlines=True)
 
-        return "Transcoding started for selected formats."
+        return render_template('index.html', console_output=output)
     else:
         return render_template('index.html')
 
