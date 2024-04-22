@@ -25,7 +25,9 @@ def index():
                 "--transcode-directory", transcode_dir,
                 "--torrent-directory", torrent_dir,
                 "--spectrogram-directory", spectrogram_dir,
-                "-f", "-m", audio_format,
+                "-f", audio_format,
+                "-m",
+                "-d",
                 permalink
             ]
             subprocess.run(command)
