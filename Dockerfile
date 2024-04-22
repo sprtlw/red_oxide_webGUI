@@ -23,9 +23,9 @@ RUN apk add --no-cache wget && \
     chmod +x "/usr/local/bin/red_oxide"
 
 # Download app.py and index.html from pastebin
-RUN wget -O app.py https://pastebin.com/raw/WV6uRrcW
+RUN wget -O app.py https://raw.githubusercontent.com/sprtlw/red_oxide_webGUI/main/app.py
 RUN mkdir -p templates && \
-    wget -O templates/index.html https://pastebin.com/raw/u7DKjetC
+    wget -O templates/index.html https://raw.githubusercontent.com/sprtlw/red_oxide_webGUI/main/templates/index.html
 RUN dos2unix app.py
 RUN dos2unix templates/index.html
 
