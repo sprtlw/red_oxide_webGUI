@@ -6,6 +6,49 @@
   font-family: 'Exo', sans-serif;
 }
 
+.input-wrapper {
+  margin-bottom: 1em;
+}
+
+.input-box {
+  border: none;
+  border-radius: 20px;
+  padding: 10px;
+  font-size: 12px;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+  width: 25%;
+  margin-bottom: 10px;
+  transition: all 0.3s ease;
+}
+
+.input-box:hover {
+  border: 2px solid #ccc;
+  transform: scale(1.05);
+}
+
+.output-box {
+  background-color: #313b49; /* Dark background color */
+  color: #d4d4d4; /* Light text color */
+  font-family: 'Courier New', Courier, monospace; /* Monospaced font */
+  font-size: 14px; /* Font size */
+  border: 1px solid #444; /* Border to mimic terminal window */
+  border-radius: 15px; /* Slightly rounded corners */
+  padding: 20px; /* Padding inside the box */
+  margin: 20px auto; /* Centered with margins */
+  width: 90%; /* Width of the box */
+  max-width: 800px; /* Maximum width */
+  overflow-y: auto; /* Enable vertical scrolling */
+  white-space: pre-wrap; /* Preserve whitespace and line breaks */
+}
+
+.output-box p {
+  margin: 0; /* Remove default paragraph margins */
+}
+
+.context {
+  text-align: center; /* Center align the content */
+}
+
 .context {
   width: 100%;
   position: absolute;
@@ -17,7 +60,7 @@
   text-align: center;
   color: #fff;
   font-size: 50px;
-  margin-top: 6em;
+  margin-top: 0.5em;
 }
 
 .context form {
@@ -25,11 +68,7 @@
   color: #fff;
   font-size: 25px;
   z-index: 2;
-  margin-top: 1em;
-}
-
-.input-wrapper {
-  margin-bottom: 1em;
+  margin-top: 0.5em;
 }
 
 .format-wrapper {
@@ -144,7 +183,7 @@
   border: none;
 }
 .zoom-in:hover {
-  transform: scale(0.9);
+  transform: scale(1.1);
 }
 .zoom-in--purple {
   background: rgb(104, 110, 202);

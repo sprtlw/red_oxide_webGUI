@@ -8,14 +8,15 @@ app = Flask(__name__)
 @app.route('/', methods=['GET', 'POST'])
 def index():
     if request.method == 'POST':
-        input_dir = "/data/torrents/music"
+        input_dir = "Z:/data/torrents/music"
         selected_formats = request.form.getlist('formats')
-        api_key = os.environ.get('RED_API')
-        transcode_dir = "/config/transcodes"
-        torrent_dir = "/data/torrents/music/watch"
-        spectrogram_dir = "/config/spectrogram"
-        permalink = request.form['url']
+        api_key = "REDACTED"
+        transcode_dir = "Z:/data/torrents/music/tmp/transcodes"
+        torrent_dir = "Z:/data/torrents/music/watch"
+        spectrogram_dir = "Z:/data/torrents/music/tmp/spectrograms"
+        permalink = request.form['permalink']
 
+        command_output = ""
         for audio_format in selected_formats:
             command = [
                 "red_oxide",
@@ -25,15 +26,21 @@ def index():
                 "--transcode-directory", transcode_dir,
                 "--torrent-directory", torrent_dir,
                 "--spectrogram-directory", spectrogram_dir,
+                "--skip-spectrogram",
                 "-f", audio_format,
                 "-m",
+                "-a",
                 "-d",
                 permalink
             ]
-            subprocess.run(command)
-            output = subprocess.check_output(command, universal_newlines=True)
+            try:
+                result = subprocess.run(
+                    command, capture_output=True, text=True, encoding='utf-8', errors='replace', env=os.environ)
+                command_output += (result.stdout or "") + (result.stderr or "")
+            except Exception as e:
+                command_output += str(e)
 
-        return render_template('index.html', console_output=output)
+        return render_template('index.html', console_output=command_output)
     else:
         return render_template('index.html')
 
