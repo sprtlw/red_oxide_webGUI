@@ -22,7 +22,7 @@ RUN apk add --no-cache wget && \
     mv "/usr/local/bin/red_oxide-Linux-x86_64-gnu" "/usr/local/bin/red_oxide" && \
     chmod +x "/usr/local/bin/red_oxide"
 
-# Download Web GUI
+# Download app.py and index.html from pastebin
 RUN wget -O app.py https://raw.githubusercontent.com/sprtlw/red_oxide_webGUI/main/app.py
 RUN mkdir -p templates && \
     wget -O templates/index.html https://raw.githubusercontent.com/sprtlw/red_oxide_webGUI/main/templates/index.html
