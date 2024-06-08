@@ -10,7 +10,7 @@ def index():
     if request.method == 'POST':
         input_dir = "Z:/data/torrents/music"
         selected_formats = request.form.getlist('formats')
-        api_key = "REDACTED"
+        api_key = ""
         transcode_dir = "Z:/data/torrents/music/tmp/transcodes"
         torrent_dir = "Z:/data/torrents/music/watch"
         spectrogram_dir = "Z:/data/torrents/music/tmp/spectrograms"
@@ -30,7 +30,7 @@ def index():
                 "-f", audio_format,
                 "-m",
                 "-a",
-                "-d",
+                # "-d",
                 permalink
             ]
             try:
