@@ -4,6 +4,7 @@ import secrets
 
 from flask import Flask, render_template, request, session
 from flask_socketio import SocketIO, join_room, leave_room
+from decouple import config
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = secrets.token_hex(
@@ -20,7 +21,7 @@ def index():
 
         input_dir = "Z:/data/torrents/music"
         selected_formats = request.form.getlist('formats')
-        api_key = ""
+        api_key = config('API_KEY')
         transcode_dir = "Z:/data/torrents/music/tmp/transcodes"
         torrent_dir = "Z:/data/torrents/music/watch"
         spectrogram_dir = "Z:/data/torrents/music/tmp/spectrograms"
