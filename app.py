@@ -1,13 +1,23 @@
-from flask import Flask, render_template, request
 import subprocess
-import os
+import uuid
+import secrets
+
+from flask import Flask, render_template, request, session
+from flask_socketio import SocketIO, join_room, leave_room
 
 app = Flask(__name__)
+app.config['SECRET_KEY'] = secrets.token_hex(
+    16)
+
+socketio = SocketIO(app)
 
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
     if request.method == 'POST':
+        session_id = str(uuid.uuid4())
+        session['id'] = session_id
+
         input_dir = "Z:/data/torrents/music"
         selected_formats = request.form.getlist('formats')
         api_key = ""
@@ -16,7 +26,6 @@ def index():
         spectrogram_dir = "Z:/data/torrents/music/tmp/spectrograms"
         permalink = request.form['permalink']
 
-        command_output = ""
         for audio_format in selected_formats:
             command = [
                 "red_oxide",
@@ -33,17 +42,49 @@ def index():
                 # "-d",
                 permalink
             ]
-            try:
-                result = subprocess.run(
-                    command, capture_output=True, text=True, encoding='utf-8', errors='replace', env=os.environ)
-                command_output += (result.stdout or "") + (result.stderr or "")
-            except Exception as e:
-                command_output += str(e)
+            socketio.start_background_task(
+                target=run_command, command=command, session_id=session_id)
 
-        return render_template('index.html', console_output=command_output)
+        return render_template('index.html', session_id=session_id)
     else:
-        return render_template('index.html')
+        session_id = str(uuid.uuid4())
+        session['id'] = session_id
+        return render_template('index.html', session_id=session_id)
+
+
+def run_command(command, session_id):
+    process = subprocess.Popen(command, stdout=subprocess.PIPE,
+                               stderr=subprocess.PIPE, text=True, encoding='utf-8', errors='replace')
+    for line in iter(process.stdout.readline, ''):
+        socketio.emit('command_output', {'data': line}, to=session_id)
+    for line in iter(process.stderr.readline, ''):
+        socketio.emit('command_output', {'data': line}, to=session_id)
+    process.stdout.close()
+    process.stderr.close()
+    process.wait()
+
+
+@socketio.on('connect')
+def handle_connect():
+    print('Client connected')
+
+
+@socketio.on('disconnect')
+def handle_disconnect():
+    print('Client disconnected')
+
+
+@socketio.on('join')
+def on_join(data):
+    session_id = data['session_id']
+    join_room(session_id)
+
+
+@socketio.on('leave')
+def on_leave(data):
+    session_id = data['session_id']
+    leave_room(session_id)
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    socketio.run(app, debug=True)
