@@ -16,17 +16,23 @@
   <body>
     <div class="context">
       <h1>Red Oxide Transcoder</h1>
+
+      <div id="url-list">
+        <!-- List of URLs will be inserted here -->
+        {% for url in url_list %}
+        <p class="url-item" data-url="{{ url }}">{{ url }}</p>
+        {% endfor %}
+      </div>
+
+      <div class="input-wrapper">
+        <label for="new-url">Add URL:</label>
+        <input type="text" id="new-url" class="input-box" />
+        <button id="add-url-button" class="btn zoom-in zoom-in--purple">
+          Add URL
+        </button>
+      </div>
+
       <form method="post" action="/" id="transcode-form">
-        <div class="input-wrapper">
-          <label for="permalink">Permalink:</label>
-          <input
-            type="text"
-            id="permalink"
-            name="permalink"
-            required
-            class="input-box"
-          />
-        </div>
         <div class="format-wrapper">
           <label for="formats">Select Audio Formats:</label><br />
         </div>

@@ -7,10 +7,20 @@
 }
 
 .input-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   margin-bottom: 1em;
 }
 
-.input-box {
+.input-wrapper label {
+  margin-right: 10px; /* Adjust the spacing between the label and input box */
+  font-size: 16px; /* Adjust the font size if needed */
+  color: #fff; /* Ensure the label color matches the design */
+}
+
+.input-wrapper .input-box {
+  margin-right: 10px; /* Adjust the spacing between the input box and button */
   border: none;
   border-radius: 20px;
   padding: 10px;
