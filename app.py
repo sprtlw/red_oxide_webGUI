@@ -1,7 +1,6 @@
 import subprocess
 import uuid
 import secrets
-import json
 
 from flask import Flask, render_template, request, session, jsonify
 from flask_socketio import SocketIO, join_room, leave_room
