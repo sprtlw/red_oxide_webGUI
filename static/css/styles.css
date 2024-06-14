@@ -357,15 +357,34 @@
 
 /* Style for the remove button (X) */
 .url-item .remove-btn {
-  background-color: transparent;
+  background-color: rgba(
+    90,
+    76,
+    174,
+    0.8
+  ); /* Slightly transparent greyish-purple background color */
   border: none;
-  color: #ff4d4d; /* Red color for the X */
-  font-size: 16px;
+  color: rgba(
+    255,
+    255,
+    255,
+    0.6
+  ); /* Lighter and more transparent white color for the X */
+  font-size: 10px; /* Smaller font size */
   cursor: pointer;
-  transition: transform 0.3s ease; /* Smooth zoom-in animation */
+  transition: transform 0.3s ease, background-color 0.3s ease; /* Smooth zoom-in and color transition */
+  font-weight: bold; /* Make the X bold */
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2); /* Add a subtle shadow */
+  border-radius: 50%; /* Make it circular */
+  width: 20px; /* Smaller width of the button */
+  height: 20px; /* Smaller height of the button */
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 /* Zoom-in effect on hover for the remove button */
 .url-item .remove-btn:hover {
   transform: scale(1.1);
+  background-color: rgba(72, 61, 139, 0.8); /* Darker greyish-purple on hover */
 }
