@@ -33,7 +33,7 @@
 
 .input-box:hover {
   border: 2px solid #ccc;
-  transform: scale(1.05);
+  transform: scale(1.02); /* Reduced scale value */
 }
 
 .output-box {
