@@ -60,10 +60,40 @@ $(document).ready(function () {
         $('#url-list').html('')
         response.url_list.forEach(function (url) {
           $('#url-list').append(
-            '<p class="url-item" data-url="' + url + '">' + url + '</p>'
+            '<div class="url-item" data-url="' +
+              url +
+              '"><span>' +
+              url +
+              '</span><button class="remove-btn" onclick="removeUrl(\'' +
+              url +
+              '\')">X</button></div>'
           )
         })
         $('#new-url').val('')
+      },
+    })
+  }
+
+  // Function to remove a URL
+  function removeUrl(urlToRemove) {
+    $.ajax({
+      type: 'POST',
+      url: '/remove_url',
+      data: JSON.stringify({ url: urlToRemove }),
+      contentType: 'application/json',
+      success: function (response) {
+        $('#url-list').html('')
+        response.url_list.forEach(function (url) {
+          $('#url-list').append(
+            '<div class="url-item" data-url="' +
+              url +
+              '"><span>' +
+              url +
+              '</span><button class="remove-btn" onclick="removeUrl(\'' +
+              url +
+              '\')">X</button></div>'
+          )
+        })
       },
     })
   }
@@ -94,7 +124,13 @@ $(document).ready(function () {
         $('#url-list').html('')
         response.url_list.forEach(function (url) {
           $('#url-list').append(
-            '<p class="url-item" data-url="' + url + '">' + url + '</p>'
+            '<div class="url-item" data-url="' +
+              url +
+              '"><span>' +
+              url +
+              '</span><button class="remove-btn" onclick="removeUrl(\'' +
+              url +
+              '\')">X</button></div>'
           )
         })
       },

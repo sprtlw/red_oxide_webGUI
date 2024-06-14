@@ -314,3 +314,58 @@
     border-radius: 50%;
   }
 }
+
+/* Style for the URL list container */
+#url-list {
+  background-color: rgba(49, 59, 73, 0.8); /* Dark transparent background */
+  color: #d4d4d4; /* Light text color */
+  font-family: 'Courier New', Courier, monospace; /* Monospaced font */
+  font-size: 14px; /* Font size */
+  border: 1px solid #444; /* Border to mimic terminal window */
+  border-radius: 15px; /* Slightly rounded corners */
+  padding: 20px; /* Padding inside the box */
+  margin: 20px auto; /* Centered with margins */
+  width: 90%; /* Width of the box */
+  max-width: 800px; /* Maximum width */
+  overflow-y: auto; /* Enable vertical scrolling */
+}
+
+/* Style for each URL item */
+.url-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: rgba(
+    255,
+    255,
+    255,
+    0.1
+  ); /* Slightly transparent background */
+  border-radius: 10px; /* Rounded corners */
+  padding: 10px; /* Padding inside the item */
+  margin-bottom: 10px; /* Space between items */
+  transition: transform 0.3s ease; /* Smooth zoom-in animation */
+  transform-origin: center; /* Ensure the zoom effect is centered */
+}
+
+/* Zoom-in effect on hover */
+.url-item:hover {
+  transform: scale(
+    1.02
+  ); /* Reduce the scale value for a less pronounced zoom effect */
+}
+
+/* Style for the remove button (X) */
+.url-item .remove-btn {
+  background-color: transparent;
+  border: none;
+  color: #ff4d4d; /* Red color for the X */
+  font-size: 16px;
+  cursor: pointer;
+  transition: transform 0.3s ease; /* Smooth zoom-in animation */
+}
+
+/* Zoom-in effect on hover for the remove button */
+.url-item .remove-btn:hover {
+  transform: scale(1.1);
+}

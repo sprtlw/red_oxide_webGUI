@@ -20,7 +20,10 @@
       <div id="url-list">
         <!-- List of URLs will be inserted here -->
         {% for url in url_list %}
-        <p class="url-item" data-url="{{ url }}">{{ url }}</p>
+        <div class="url-item" data-url="{{ url }}">
+          <span>{{ url }}</span>
+          <button class="remove-btn" onclick="removeUrl('{{ url }}')">X</button>
+        </div>
         {% endfor %}
       </div>
 
