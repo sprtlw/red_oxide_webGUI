@@ -1,7 +1,7 @@
 import unittest
 import subprocess
 from unittest.mock import patch, MagicMock, ANY
-from flask import session
+from flask import session, json
 from app import app, url_list, run_command, socketio
 
 
