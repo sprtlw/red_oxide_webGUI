@@ -2,7 +2,7 @@ import unittest
 import subprocess
 from unittest.mock import patch, MagicMock, ANY
 from flask import session
-from app import app, url_list, run_command
+from app import app, url_list, run_command, socketio
 
 
 class TestApp(unittest.TestCase):
@@ -85,5 +85,10 @@ class TestApp(unittest.TestCase):
             'command_output', {'data': 'error line 1\n'}, to=session_id)
 
 
+def run_tests():
+    """Runs the unit tests."""
+    tests = unittest.TestLoader().discover('tests')
+    unittest.TextTestRunner(verbosity=2).run(tests)
+
 if __name__ == '__main__':
-    unittest.main()
+    run_tests()
