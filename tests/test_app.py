@@ -14,14 +14,14 @@ class TestApp(unittest.TestCase):
         response = self.app.post(
             '/add_url', json={'url': 'http://example.com'})
         self.assertEqual(response.status_code, 200)
-        self.assertIn('http://example.com', response.json['url_list'])
+        self.assertIn('http://example.com', json.loads(response.data)['url_list'])
 
     def test_remove_url(self):
         url_list.append('http://example.com')
         response = self.app.post(
             '/remove_url', json={'url': 'http://example.com'})
         self.assertEqual(response.status_code, 200)
-        self.assertNotIn('http://example.com', response.json['url_list'])
+        self.assertNotIn('http://example.com', json.loads(response.data)['url_list'])
 
     def test_start_transcode(self):
         with self.app as client:
