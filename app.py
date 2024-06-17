@@ -1,6 +1,7 @@
 import subprocess
 import uuid
 import secrets
+from discord_webhook import DiscordWebhook, DiscordEmbed
 
 from flask import Flask, render_template, request, session, jsonify
 from flask_socketio import SocketIO, join_room, leave_room
@@ -58,30 +59,31 @@ def process_urls_and_run_commands(api_key, input_dir, transcode_dir, torrent_dir
     url_list.clear()
 
 
-@app.route('/', methods=['GET', 'POST'])
+@app.route('/start_transcode', methods=['POST'])
+def start_transcode():
+    session_id = str(uuid.uuid4())
+    session['id'] = session_id
+
+    input_dir = "Z:/data/torrents/music"
+    selected_formats = request.form.getlist('formats')
+    api_key = config('API_KEY')
+    transcode_dir = "Z:/data/torrents/music/tmp/transcodes"
+    torrent_dir = "Z:/data/torrents/music/watch"
+    spectrogram_dir = "Z:/data/torrents/music/tmp/spectrograms"
+
+    # Process the submitted URLs and run commands for transcoding
+    process_urls_and_run_commands(
+        api_key, input_dir, transcode_dir, torrent_dir, spectrogram_dir, selected_formats, session_id)
+
+    return render_template('index.html', session_id=session_id, url_list=url_list)
+
+
+@app.route('/', methods=['GET'])
 def index():
-    # Generate a unique session ID for each request
-    if request.method == 'POST':
-        session_id = str(uuid.uuid4())
-        session['id'] = session_id
-
-        input_dir = "Z:/data/torrents/music"
-        selected_formats = request.form.getlist('formats')
-        api_key = config('API_KEY')
-        transcode_dir = "Z:/data/torrents/music/tmp/transcodes"
-        torrent_dir = "Z:/data/torrents/music/watch"
-        spectrogram_dir = "Z:/data/torrents/music/tmp/spectrograms"
-
-        # Process the submitted URLs and run commands for transcoding
-        process_urls_and_run_commands(
-            api_key, input_dir, transcode_dir, torrent_dir, spectrogram_dir, selected_formats, session_id)
-
-        return render_template('index.html', session_id=session_id)
-    else:
-        # Generate a new session ID for GET requests
-        session_id = str(uuid.uuid4())
-        session['id'] = session_id
-        return render_template('index.html', session_id=session_id, url_list=url_list)
+    # Generate a new session ID for GET requests
+    session_id = str(uuid.uuid4())
+    session['id'] = session_id
+    return render_template('index.html', session_id=session_id, url_list=url_list)
 
 
 def run_command(command, session_id):
@@ -89,13 +91,22 @@ def run_command(command, session_id):
     process = subprocess.Popen(command, stdout=subprocess.PIPE,
                                stderr=subprocess.PIPE, text=True, encoding='utf-8', errors='replace')
 
+    # Setup Discord Webhook
+    webhook_url = config('DISCORD_WEBHOOK_URL')
+    webhook = DiscordWebhook(url=webhook_url, content="Process started")
+    webhook.execute()
+
     # Read and emit command output to session
     for line in process.stdout:
-        print(line)
+        embed = DiscordEmbed(title="Command Output", description=line)
+        webhook.add_embed(embed)
+        webhook.execute()
         socketio.emit('command_output', {'data': line}, to=session_id)
 
     for line in process.stderr:
-        print(line)
+        embed = DiscordEmbed(title="Command Error", description=line)
+        webhook.add_embed(embed)
+        webhook.execute()
         socketio.emit('command_output', {'data': line}, to=session_id)
 
     process.wait()
