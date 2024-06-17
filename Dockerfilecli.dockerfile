@@ -6,11 +6,10 @@ WORKDIR /config
 
 # Install dependencies (lame, sox, flac, Python)
 RUN apt-get update && \
-    apt-get install -y mktorrent lame sox flac python3 python3-pip git vim
+    apt-get install -y curl mktorrent lame sox flac python3 python3-pip git vim
 
 # Install Intermodal
-RUN apt-get install -y curl && \
-    curl --proto '=https' --tlsv1.2 -sSf https://imdl.io/install.sh | bash -s -- --to /usr/local/bin
+RUN curl --proto '=https' --tlsv1.2 -sSf https://imdl.io/install.sh | bash -s -- --to /usr/local/bin
 
 # Install Red Oxide
 RUN apt-get install -y wget && \

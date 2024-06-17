@@ -6,11 +6,10 @@ WORKDIR /app
 
 # Install dependencies (lame, sox, flac, Python, git)
 RUN apt-get update && \
-    apt-get install -y lame sox flac python3 python3-pip python3-venv git wget dos2unix
+    apt-get install -y lame sox flac python3 python3-pip python3-venv git wget curl dos2unix
 
 # Install Intermodal
-RUN apt-get install -y curl && \
-    curl --proto '=https' --tlsv1.2 -sSf https://imdl.io/install.sh | bash -s -- --to /usr/local/bin
+RUN curl --proto '=https' --tlsv1.2 -sSf https://imdl.io/install.sh | bash -s -- --to /usr/local/bin
 
 # Install Red Oxide
 RUN latest_version=$(wget -qO- https://github.com/DevYukine/red_oxide/releases/latest | grep -o -E "v[0-9]+\.[0-9]+\.[0-9]+" | head -n 1) && \
