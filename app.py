@@ -49,8 +49,7 @@ def process_urls_and_run_commands(api_key, input_dir, transcode_dir, torrent_dir
         ]
         for file_format in selected_formats:
             command.extend(["-f", file_format])
-        command.extend(["-m", "-a", "-d", url])
-        print(command)
+        command.extend(["-m", "-a", url])
         # Start background task to run command
         socketio.start_background_task(
             target=run_command, command=command, session_id=session_id)
