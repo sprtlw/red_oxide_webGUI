@@ -1,0 +1,57 @@
+
+# 2024-06-15 04:17:50.070214
++export GEMINI_API_KEY=AIzaSyBvy57eNjLozWrvRL57bg35WuQi5aet_pc
+
+# 2024-06-15 04:19:10.157836
++alias
+
+# 2024-06-15 04:34:13.607064
++run unit tests
+
+# 2024-06-15 04:35:12.582965
++did the unit tests succeed?
+
+# 2024-06-15 04:35:59.441597
++run the unit test
+
+# 2024-06-15 04:37:14.606715
++python -m `unittest` `tests/test_app.py`
+
+# 2024-06-15 04:39:10.778358
++python3 -m unittest tests/test_app.py
++E
++======================================================================
++ERROR: test_app (unittest.loader._FailedTest)
++----------------------------------------------------------------------
++ImportError: Failed to import test module: test_app
++Traceback (most recent call last):
++  File "/usr/lib/python3.10/unittest/loader.py", line 154, in loadTestsFromName
++    module = __import__(module_name)
++ModuleNotFoundError: No module named 'tests.test_app'
++
++
++----------------------------------------------------------------------
++Ran 1 test in 0.000s
++
++FAILED (errors=1)
+
+# 2024-06-15 04:48:08.104814
++make the site prettier
+
+# 2024-06-15 04:48:50.394480
++minimalist, dev techy look. restyle the whole site
+
+# 2024-06-15 04:54:08.499727
++how about a modern look
+
+# 2024-06-15 04:54:55.585176
++darker colors if possible, for the rest you get free reign
+
+# 2024-06-15 04:57:34.811954
++style the checkboxes and center the text
+
+# 2024-06-15 04:57:52.683800
++add animations
+
+# 2024-06-15 04:58:09.604598
++hover effects loading animations

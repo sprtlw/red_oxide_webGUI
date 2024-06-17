@@ -64,12 +64,12 @@ def start_transcode():
     session_id = str(uuid.uuid4())
     session['id'] = session_id
 
-    input_dir = "Z:/data/torrents/music"
+    input_dir = "/data/torrents/music"
     selected_formats = request.form.getlist('formats')
     api_key = config('API_KEY')
-    transcode_dir = "Z:/data/torrents/music/tmp/transcodes"
-    torrent_dir = "Z:/data/torrents/music/watch"
-    spectrogram_dir = "Z:/data/torrents/music/tmp/spectrograms"
+    transcode_dir = "/data/torrents/music/tmp/transcodes"
+    torrent_dir = "/data/torrents/music/watch"
+    spectrogram_dir = "/data/torrents/music/tmp/spectrograms"
 
     # Process the submitted URLs and run commands for transcoding
     process_urls_and_run_commands(
