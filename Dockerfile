@@ -18,7 +18,7 @@ RUN latest_version=$(wget -qO- https://github.com/DevYukine/red_oxide/releases/l
     chmod +x /usr/local/bin/red_oxide
 
 # Clone the web GUI repository directly into /app
-RUN git clone https://github.com/sprtlw/red_oxide_webGUI.git /app
+RUN git clone --branch batch-upload https://github.com/sprtlw/red_oxide_webGUI.git /app
 
 # Convert the whole directory to LF line endings
 RUN find /app -type f -exec dos2unix {} +
