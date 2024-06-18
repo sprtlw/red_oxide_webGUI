@@ -38,6 +38,7 @@ $(document).ready(function () {
   // Display command output received from server
   socket.on('command_output', function (msg) {
     $('#command-output').append('<p>' + msg.data + '</p>')
+    $('#command-output').scrollTop($('#command-output')[0].scrollHeight) // Auto-scroll to bottom
   })
 
   // Submit form to clear output and emit leave event
@@ -135,5 +136,46 @@ $(document).ready(function () {
         })
       },
     })
+  })
+})
+
+$(document).ready(function () {
+  // Function to handle file upload
+  function uploadUrlFile(file) {
+    const reader = new FileReader()
+    reader.onload = function (event) {
+      const urls = event.target.result
+        .split('\n')
+        .filter((url) => url.trim() !== '')
+      $.ajax({
+        type: 'POST',
+        url: '/upload_url_file',
+        data: JSON.stringify({ urls: urls }),
+        contentType: 'application/json',
+        success: function (response) {
+          $('#url-list').html('')
+          response.url_list.forEach(function (url) {
+            $('#url-list').append(
+              '<div class="url-item" data-url="' +
+                url +
+                '"><span>' +
+                url +
+                '</span><button class="remove-btn" onclick="removeUrl(\'' +
+                url +
+                '\')">X</button></div>'
+            )
+          })
+        },
+      })
+    }
+    reader.readAsText(file)
+  }
+
+  // Click event for uploading URL file
+  $('#upload-url-file-button').click(function () {
+    const file = $('#url-file')[0].files[0]
+    if (file) {
+      uploadUrlFile(file)
+    }
   })
 })
