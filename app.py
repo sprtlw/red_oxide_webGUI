@@ -34,6 +34,16 @@ def remove_url():
     return jsonify(url_list=url_list)
 
 
+@app.route('/upload_url_file', methods=['POST'])
+def upload_url_file():
+    data = request.get_json()
+    urls = data.get('urls', [])
+    for url in urls:
+        if url and url not in url_list:
+            url_list.append(url)
+    return jsonify(url_list=url_list)
+
+
 def process_urls_and_run_commands(api_key, input_dir, transcode_dir, torrent_dir, spectrogram_dir, selected_formats, session_id):
     # Loop through URL list and create command
     for url in url_list:

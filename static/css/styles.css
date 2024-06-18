@@ -328,6 +328,7 @@
   width: 90%; /* Width of the box */
   max-width: 800px; /* Maximum width */
   overflow-y: auto; /* Enable vertical scrolling */
+  height: 200px; /* Fixed height */
 }
 
 /* Style for each URL item */
