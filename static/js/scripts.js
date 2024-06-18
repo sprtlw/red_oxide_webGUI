@@ -38,6 +38,7 @@ $(document).ready(function () {
   // Display command output received from server
   socket.on('command_output', function (msg) {
     $('#command-output').append('<p>' + msg.data + '</p>')
+    $('#command-output').scrollTop($('#command-output')[0].scrollHeight) // Auto-scroll to bottom
   })
 
   // Submit form to clear output and emit leave event

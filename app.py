@@ -1,8 +1,8 @@
 import subprocess
 import uuid
 import secrets
-from discord_webhook import DiscordWebhook, DiscordEmbed
 
+from discord_webhook import DiscordWebhook, DiscordEmbed
 from flask import Flask, render_template, request, session, jsonify
 from flask_socketio import SocketIO, join_room, leave_room
 from decouple import config
