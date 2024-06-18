@@ -45,6 +45,15 @@ def upload_url_file():
 
 
 def process_urls_and_run_commands(api_key, input_dir, transcode_dir, torrent_dir, spectrogram_dir, selected_formats, session_id):
+    # Start background task to process URLs
+    socketio.start_background_task(
+        target=process_urls, api_key=api_key, input_dir=input_dir, transcode_dir=transcode_dir,
+        torrent_dir=torrent_dir, spectrogram_dir=spectrogram_dir, selected_formats=selected_formats,
+        session_id=session_id
+    )
+
+
+def process_urls(api_key, input_dir, transcode_dir, torrent_dir, spectrogram_dir, selected_formats, session_id):
     # Loop through URL list and create command
     for url in url_list:
         command = [
@@ -61,8 +70,7 @@ def process_urls_and_run_commands(api_key, input_dir, transcode_dir, torrent_dir
             command.extend(["-f", file_format])
         command.extend(["-m", "-a", url])
         # Start background task to run command
-        socketio.start_background_task(
-            target=run_command, command=command, session_id=session_id)
+        run_command(command, session_id)
 
     # Clear URL list after processing
     url_list.clear()

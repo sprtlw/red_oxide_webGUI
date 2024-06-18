@@ -49,6 +49,7 @@
   max-width: 800px; /* Maximum width */
   overflow-y: auto; /* Enable vertical scrolling */
   white-space: pre-wrap; /* Preserve whitespace and line breaks */
+  height: 200px; /* Fixed height */
 }
 
 .output-box p {
